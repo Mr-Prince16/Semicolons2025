@@ -1,0 +1,32 @@
+<!-- <div class="h-screen w-full flex flex-col items-center justify-center bg-Tritanopia p-4 relative">
+        <app-header></app-header>
+        <app-sidebar></app-sidebar>
+        <app-dashboard></app-dashboard>
+        <app-chatbot></app-chatbot>
+        <app-footer></app-footer>
+    </div> -->
+
+<div class="min-h-screen  w-full flex flex-col justify-center p-4 relative  bg-cover bg-fixed" [ngClass]="['bg-' + currentColorblindMode, currentTextColor]">
+    <app-header>
+
+    </app-header>
+    <!-- Header Component -->
+
+    <app-sidebar></app-sidebar>
+    <!-- Sidebar Component -->
+
+    <div class="flex-grow flex flex-col max-h-[500000px] ">
+        <!-- <app-dashboard></app-dashboard> -->
+        <router-outlet></router-outlet>
+
+        <!-- Dashboard Component -->
+    </div>
+    <app-chatbot></app-chatbot>
+
+
+    <!-- AI Chatbot Component -->
+
+
+    <app-footer></app-footer>
+    <!-- Sticky Footer Component -->
+</div>

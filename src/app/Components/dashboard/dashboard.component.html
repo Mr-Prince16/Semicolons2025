@@ -1,0 +1,99 @@
+<div class="w-full max-w-[1900px] h-auto bg-white bg-opacity-10 backdrop-blur-glass rounded-2xl p-8 shadow-lg flex flex-col mt-16 ml-14 space-y-6">
+    <!-- Title Section -->
+    <div class="text-center">
+        <h2 class="text-3xl md:text-4xl font-extrabold tracking-wide">
+            View and manage claims with
+            <span class="bg-gradient-to-r from-blue-400 to-purple-500 text-transparent bg-clip-text">
+        AI-powered insights
+      </span>
+        </h2>
+        <p class="text-lg text-gray-300 mt-2">
+            Optimize claim handling with intelligent automation and analytics.
+        </p>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-6 w-full mt-4">
+        <!-- Closed Claims Card -->
+        <div class="bg-white bg-opacity-10 backdrop-blur-lg p-6 rounded-xl shadow-lg text-lg font-semibold text-center transition-all hover:bg-opacity-20 hover:scale-105 border border-gray-200 border-opacity-30">
+            <img src="assets/approvedclaim.svg" alt="Closed Claims" class="w-16 h-16 mx-auto mb-3" />
+            <h3 class="text-xl font-bold mt-2">Closed Claims</h3>
+            <p class="text-lg">{{ closedClaims }}</p>
+            <button (click)="openModal('closed')" class="mt-4 px-4 py-2 bg-gradient-to-r from-green-500 to-teal-500 text-white font-medium rounded-lg shadow-md hover:opacity-80">
+        View Claims
+      </button>
+        </div>
+
+        <!-- Rejected Claims Card -->
+        <div class="bg-white bg-opacity-10 backdrop-blur-lg p-6 rounded-xl shadow-lg text-lg font-semibold text-center transition-all hover:bg-opacity-20 hover:scale-105 border border-gray-200 border-opacity-30">
+            <img src="assets/rejectedclaim.svg" alt="Closed Claims" class="w-16 h-16 mx-auto mb-3" />
+            <h3 class="text-xl font-bold mt-2">Rejected Claims</h3>
+            <p class="text-lg">{{ rejectedClaims }}</p>
+            <button (click)="openModal('rejected')" class="mt-4 px-4 py-2 bg-gradient-to-r from-red-500 to-pink-500 text-white font-medium rounded-lg shadow-md hover:opacity-80">
+        View Claims
+      </button>
+        </div>
+
+        <!-- New Claims Card -->
+        <div class="bg-white bg-opacity-10 backdrop-blur-lg p-6 rounded-xl shadow-lg text-lg font-semibold text-center transition-all hover:bg-opacity-20 hover:scale-105 border border-gray-200 border-opacity-30">
+            <img src="assets/newclaim.svg" alt="Closed Claims" class="w-16 h-16 mx-auto mb-3" />
+            <h3 class="text-xl font-bold mt-2">New Claims</h3>
+            <p class="text-lg">{{ newClaims }}</p>
+            <button (click)="openModal('new')" class="mt-4 px-4 py-2 bg-gradient-to-r from-blue-500 to-purple-500 text-white font-medium rounded-lg shadow-md hover:opacity-80">
+        View Claims
+      </button>
+        </div>
+    </div>
+
+    <!-- Modal -->
+
+    <app-chart-container></app-chart-container>
+    <app-table></app-table>
+    <app-timeline></app-timeline>
+
+
+    <!-- <div class="w-full max-h-[600px] overflow-y-auto">
+        <app-chart-container></app-chart-container>
+    </div> -->
+</div>
+
+<div *ngIf="isModalOpen" class="fixed inset-0 bg-black bg-opacity-40 backdrop-blur-md z-50 flex justify-center items-center">
+    <div class="relative w-[90%] max-w-lg bg-white bg-opacity-10 backdrop-blur-lg rounded-2xl shadow-2xl p-6 border border-white border-opacity-20">
+        <button (click)="closeModal()" class="absolute top-3 right-3 text-gray-300 hover:text-white text-2xl font-bold transition-transform hover:scale-110">
+      ✕
+    </button>
+
+        <!-- Modal Title -->
+        <h2 class="text-2xl font-bold text-center">
+            Claims -
+            <span class="bg-gradient-to-r from-blue-400 to-purple-500 text-transparent bg-clip-text">{{ modalType | titlecase }}</span
+      >
+    </h2>
+
+    <!-- Claims List -->
+    <ul class="mt-4 space-y-2 text-center">
+      <li
+        *ngFor="let claim of selectedClaims"
+        class="p-3 rounded-lg bg-white bg-opacity-20 shadow-md border border-white border-opacity-10 backdrop-blur-md"
+      >
+        {{ claim }}
+
+        <!-- View Claim Button -->
+        <button
+          class="ml-4 px-3 py-1 text-sm font-medium rounded-md bg-gradient-to-r from-blue-500 to-purple-500 hover:opacity-80 transition-all"
+        >
+          View Claim
+        </button>
+      </li>
+    </ul>
+
+    <!-- Close Modal Button -->
+    <div class="text-center mt-5">
+      <button
+        (click)="closeModal()"
+        class="px-5 py-2 rounded-full text-white font-medium text-lg bg-gradient-to-r from-gray-800 to-gray-900 hover:opacity-80 transition-all"
+      >
+        Close
+      </button>
+    </div>
+  </div>
+</div>

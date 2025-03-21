@@ -1,0 +1,67 @@
+<div id="claimsTable" class="p-6">
+    <!-- Search Bar with Catchy Phrase -->
+    <div class="flex justify-between items-center mb-4">
+        <div class="text-lg font-semibold italic text-gray-300">
+            "Helping adjusters streamline claims—one case at a time!"
+        </div>
+        <input type="text" [(ngModel)]="searchTerm" (input)="filterClaims()" placeholder="Search claims..." class="px-4 py-2 border border-gray-600 rounded-lg bg-gray-900 text-gray-200 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500"
+        />
+    </div>
+
+    <!-- Glassmorphic Table -->
+    <div class="overflow-x-auto">
+        <table class="w-full border-collapse rounded-lg shadow-lg bg-opacity-20 bg-gray-800 backdrop-blur-md text-gray-200">
+            <!-- Table Headers -->
+            <thead>
+                <tr class="bg-gray-900 bg-opacity-50">
+                    <th *ngFor="let column of tableColumns" class="py-3 px-4 text-left font-semibold">
+                        {{ column }}
+                    </th>
+                </tr>
+            </thead>
+
+            <!-- Table Body -->
+            <tbody>
+                <tr *ngFor="let claim of paginatedClaims" class="border-b border-gray-700 hover:bg-gray-800 transition">
+                    <td *ngFor="let column of tableColumns" class="py-2 px-4">
+                        <!-- View Claim Button -->
+                        <ng-container *ngIf="column === 'Process Claim'; else normalData">
+                            <button (click)="router.navigate(['/process-claim', claim['Claim ID']])" class="px-4 py-1 bg-blue-600 hover:bg-blue-700 rounded-lg text-gray-200 text-sm">
+                                Process Claim
+                            </button>
+                        </ng-container>
+
+                        <!-- Normal Data & Completion Status -->
+                        <ng-template #normalData>
+                            <ng-container *ngIf="column === 'Completion Status'; else textData">
+                                <!-- Status Label -->
+                                <div class="mb-1 text-base font-medium" [ngClass]="getStatusTextColor(claim[column])">
+                                    {{ claim[column].label }}
+                                </div>
+                                <!-- Progress Bar -->
+                                <div class="w-full bg-gray-200 rounded-full h-2.5 dark:bg-gray-700">
+                                    <div class="h-2.5 rounded-full transition-all duration-300" [ngClass]="getStatusBarColor(claim[column])" [ngStyle]="{ 'width': claim[column].percentage + '%' }">
+                                    </div>
+                                </div>
+                            </ng-container>
+                            <ng-template #textData>
+                                <span>{{ claim[column] }}</span>
+                            </ng-template>
+                        </ng-template>
+                    </td>
+                </tr>
+            </tbody>
+            <!-- Pagination Controls -->
+            <div class="flex justify-between items-center mt-4">
+                <button (click)="prevPage()" [disabled]="currentPage === 1" class="px-4 py-2 bg-gray-700 hover:bg-gray-600 rounded-lg text-gray-200 disabled:opacity-50">
+        Previous
+    </button>
+                <span class="text-gray-300">Page {{ currentPage }} of {{ totalPages }}</span>
+                <button (click)="nextPage()" [disabled]="currentPage === totalPages" class="px-4 py-2 bg-gray-700 hover:bg-gray-600 rounded-lg text-gray-200 disabled:opacity-50">
+        Next
+    </button>
+            </div>
+
+        </table>
+    </div>
+</div>

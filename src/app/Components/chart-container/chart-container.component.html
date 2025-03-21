@@ -1,0 +1,47 @@
+<div class="w-full flex flex-wrap justify-center gap-4">
+    <!-- Row 1: Pyramid, Pie & Bar Charts -->
+    <div class="w-full flex flex-wrap justify-center gap-16">
+        <!-- Pyramid Chart -->
+        <div class="w-full sm:w-[30%] max-w-[700px] min-h-[450px]  bg-opacity-10 backdrop-blur-lg rounded-2xl p-4 shadow-lg border border-white/20 h-[350px] flex flex-col">
+            <h3 class="text-xl font-bold text-center tracking-wide">🔺 Data Pyramid</h3>
+            <p class="text-sm text-center mt-1">Visualizing hierarchical data.</p>
+            <div class="flex-grow flex items-center justify-center mt-2" *ngIf="isBrowser">
+                <apx-chart [series]="chartOptionsPolar.series" [chart]="chartOptionsPolar.chart" [plotOptions]="chartOptionsPolar.plotOptions" [dataLabels]="chartOptionsPolar.dataLabels" [xaxis]="chartOptionsPolar.xaxis" [colors]="chartOptionsPolar.colors" [legend]="chartOptionsPolar.legend">
+                </apx-chart>
+            </div>
+        </div>
+
+        <!-- Pie Chart -->
+        <div class="w-full sm:w-[30%] max-w-[700px] min-h-[450px] bg-white bg-opacity-10 backdrop-blur-lg rounded-2xl p-4 shadow-lg border border-white/20 h-[350px] flex flex-col">
+            <h3 class="text-xl font-bold text-center tracking-wide">🥧 Claim Distribution</h3>
+            <p class="text-sm text-center mt-1">Breakdown of claims by category.</p>
+            <div class="flex-grow flex items-center justify-center mt-2" *ngIf="isBrowser">
+                <apx-chart [series]="chartOptionsPie.series" [chart]="chartOptionsPie.chart" [labels]="chartOptionsPie.labels" [responsive]="chartOptionsPie.responsive">
+                </apx-chart>
+            </div>
+        </div>
+
+        <!-- Bar Chart -->
+        <div class="w-full sm:w-[30%] max-w-[700px] min-h-[450px] bg-opacity-10 backdrop-blur-lg rounded-2xl p-4 shadow-lg border border-white/20 h-[350px] flex flex-col">
+            <h3 class="text-xl font-bold text-center tracking-wide">📊 Financial Overview</h3>
+            <p class="text-sm text-center mt-1">Analyze revenue, profit & cash flow trends.</p>
+            <div class="flex-grow flex items-center justify-center mt-2" *ngIf="isBrowser">
+                <apx-chart [series]="chartOptionsBar.series" [chart]="chartOptionsBar.chart" [plotOptions]="chartOptionsBar.plotOptions" [dataLabels]="chartOptionsBar.dataLabels" [stroke]="chartOptionsBar.stroke" [xaxis]="chartOptionsBar.xaxis" [yaxis]="chartOptionsBar.yaxis"
+                    [fill]="chartOptionsBar.fill" [tooltip]="chartOptionsBar.tooltip">
+                </apx-chart>
+            </div>
+        </div>
+    </div>
+
+    <!-- Row 2: Gantt Chart -->
+    <!-- <div class="w-full flex justify-center">
+        <div class="w-full sm:w-[75%] max-w-[900px]  backdrop-blur-lg rounded-2xl p-4 shadow-lg border border-white/20 h-[350px] flex flex-col">
+            <h3 class="text-xl font-bold text-center tracking-wide">📅 Project Timeline</h3>
+            <p class="text-sm text-center mt-1">Track project phases & durations.</p>
+            <div class="flex-grow flex items-center justify-center mt-2" *ngIf="isBrowser">
+                <apx-chart [series]="chartOptionsGantt.series" [chart]="chartOptionsGantt.chart" [plotOptions]="chartOptionsGantt.plotOptions" [dataLabels]="chartOptionsGantt.dataLabels" [xaxis]="chartOptionsGantt.xaxis" [yaxis]="chartOptionsGantt.yaxis" [grid]="chartOptionsGantt.grid">
+                </apx-chart>
+            </div>
+        </div>
+    </div> -->
+</div>

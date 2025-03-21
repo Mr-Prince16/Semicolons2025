@@ -1,1 +1,41 @@
-/* You can add global styles to this file, and also import other style files */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Glassmorphic Scrollbar */
+
+.glass-scrollbar::-webkit-scrollbar-track {
+    background: rgba(0, 0, 0, 0.2);
+    /* Darker background */
+}
+
+.glass-scrollbar::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.4);
+    /* Slightly darker thumb */
+}
+
+.glass-scrollbar::-webkit-scrollbar-thumb:hover {
+    background: rgba(255, 255, 255, 0.6);
+}
+
+
+/* Apply to entire app */
+
+html,
+body {
+    min-height: 100vh;
+    background-size: cover;
+    background-attachment: fixed;
+}
+
+.no-scrollbar::-webkit-scrollbar {
+    display: none;
+    /* Hides scrollbar in Webkit browsers (Chrome, Safari) */
+}
+
+.no-scrollbar {
+    -ms-overflow-style: none;
+    /* Hides scrollbar in Internet Explorer and Edge */
+    scrollbar-width: none;
+    /* Hides scrollbar in Firefox */
+}

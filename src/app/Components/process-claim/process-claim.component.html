@@ -1,0 +1,83 @@
+<div class="flex justify-center items-center min-h-screen pt-20">
+    <div class="w-[1800px] min-h-screen bg-white/10 backdrop-blur-md shadow-2xl rounded-3xl p-8 relative border border-white/20">
+
+        <!-- Stepper -->
+        <div class="flex justify-center w-full mb-10 relative">
+            <div class="flex w-4/5 justify-between relative">
+                <div *ngFor="let step of steps; let i = index" class="relative flex flex-col items-center">
+
+                    <!-- Step Circle -->
+                    <div class="w-14 h-14 flex items-center justify-center rounded-full shadow-[4px_4px_10px_#111827,-4px_-4px_10px_#334155] bg-gray-800 text-white text-lg font-bold transition-all duration-500" [ngClass]="{ 'bg-blue-500 shadow-[4px_4px_10px_#1e3a8a,-4px_-4px_10px_#60a5fa]': i <= currentStep }">
+                        {{ i + 1 }}
+                    </div>
+
+                    <!-- Step Title -->
+                    <div class="absolute top-16 text-white text-lg font-semibold whitespace-nowrap">
+                        {{ step.title }}
+                    </div>
+
+                    <!-- Connecting Line -->
+                    <div *ngIf="i < steps.length - 1" class="absolute top-1/2 left-full w-[600px] h-1 bg-gray-500 transition-all duration-500" [ngClass]="{ 'bg-blue-500': i < currentStep }">
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="flex w-full bg-white/10 backdrop-blur-lg rounded-2xl shadow-[inset_3px_3px_10px_rgba(0,0,0,0.2),inset_-3px_-3px_10px_rgba(255,255,255,0.1)] overflow-hidden">
+
+            <!-- Left Side: SuperAgent Button -->
+            <div class="w-1/2 flex flex-col items-center justify-center p-8 border-r border-white/30">
+                <button (click)="performSuperAgentOperation()" class="px-6 py-3 text-lg font-semibold text-white rounded-lg bg-gray-800 shadow-[4px_4px_10px_#111827,-4px_-4px_10px_#334155] active:shadow-[inset_4px_4px_10px_#111827,inset_-4px_-4px_10px_#334155] transition-all duration-200"
+                    [disabled]="loading">
+                    {{ loading ? 'Processing...' : 'Run SuperAgent' }}
+                </button>
+            </div>
+
+            <!-- Right Side: Description & Shimmer Effect -->
+            <div class="w-1/2 flex flex-col items-center justify-center p-8">
+                <h2 class="text-white text-2xl font-bold mb-4">{{ steps[currentStep].title }}</h2>
+                <p class="text-white text-lg text-center mb-4">{{ steps[currentStep].description }}</p>
+
+                <!-- Shimmer Effect (Same height as description) -->
+                <!-- Shimmer Effect: Simple Pulsing Paragraphs -->
+                <div *ngIf="loading" class="w-full space-y-4">
+                    <div class="h-6 bg-gray-700 rounded-lg animate-pulse"></div>
+                    <div class="h-6 bg-gray-700 rounded-lg animate-pulse w-5/6"></div>
+                    <div class="h-6 bg-gray-700 rounded-lg animate-pulse w-4/6"></div>
+                    <div class="h-6 bg-gray-700 rounded-lg animate-pulse w-3/6"></div>
+                </div>
+                <div *ngIf="!loading" class="text-white text-lg">{{ output }}</div>
+            </div>
+        </div>
+
+        <!-- Navigation Buttons -->
+        <div class="flex justify-between w-full mt-8">
+            <button (click)="prevStep()" [disabled]="currentStep === 0" class="px-6 py-2 text-white rounded-lg bg-gray-800 shadow-[4px_4px_10px_#111827,-4px_-4px_10px_#334155] active:shadow-[inset_4px_4px_10px_#111827,inset_-4px_-4px_10px_#334155] transition-all duration-200">
+                Previous
+            </button>
+            <button (click)="nextStep()" [disabled]="currentStep === steps.length - 1" class="px-6 py-2 text-white rounded-lg bg-gray-800 shadow-[4px_4px_10px_#111827,-4px_-4px_10px_#334155] active:shadow-[inset_4px_4px_10px_#111827,inset_-4px_-4px_10px_#334155] transition-all duration-200">
+                Next
+            </button>
+        </div>
+        <!-- Action Buttons -->
+        <div class="flex justify-center gap-6 mt-10">
+
+
+            <button (click)="handleAction('Adjuster Approval (Close Claim)')" class="px-6 py-3 text-lg font-semibold text-white rounded-lg bg-green-600 shadow-md hover:bg-green-700 hover:shadow-lg active:shadow-inner transition-all duration-200">
+        Adjuster Approval (Close Claim)
+    </button>
+
+            <button (click)="handleAction('Reject Claim')" class="px-6 py-3 text-lg font-semibold text-white rounded-lg bg-red-600 shadow-md hover:bg-red-700 hover:shadow-lg active:shadow-inner transition-all duration-200">
+        Reject Claim
+    </button>
+
+
+            <button (click)="handleAction('Request Additional Information')" class="px-6 py-3 text-lg font-semibold text-white rounded-lg bg-yellow-500 shadow-md hover:bg-yellow-600 hover:shadow-lg active:shadow-inner transition-all duration-200">
+        Request Additional Information
+    </button>
+
+        </div>
+
+    </div>
+
+</div>

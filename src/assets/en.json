@@ -1,0 +1,14 @@
+{
+    "HEADER": {
+        "TITLE": "Insure Agent",
+        "LOGOUT": "Logout",
+        "SETTINGS": "Settings",
+        "COLORBLIND": {
+            "NORMAL": "Normal Vision",
+            "PROTANOPIA": "Protanopia",
+            "DEUTERANOPIA": "Deuteranopia",
+            "TRITANOPIA": "Tritanopia",
+            "ACHROMATOPSIA": "Achromatopsia"
+        }
+    }
+}

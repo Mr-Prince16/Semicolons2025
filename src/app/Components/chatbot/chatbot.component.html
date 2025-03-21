@@ -1,0 +1,33 @@
+<div id="chatbotContainer" class="fixed overflow-hidden top-1/2 right-0 transform -translate-y-1/2 w-14 h-96 max-h-[100000px] bg-white bg-opacity-10 backdrop-blur-lg rounded-l-2xl shadow-lg transition-all duration-500 flex items-center justify-center cursor-pointer hover:w-80"
+    [ngClass]="{ 'w-80': showChatbot, 'w-14': !showChatbot }" (mouseenter)="showChatbot = true" (mouseleave)="showChatbot = false">
+
+    <div *ngIf="!showChatbot" class="flex flex-col items-center justify-center">
+        <img src="/assets/chat-icon.svg" alt="Chat" class="w-7 h-20 mb-2 opacity-70 transition-all duration-300 hover:scale-110" />
+        <span class="text-xs rotate-90">Hey Prince</span>
+    </div>
+
+
+    <div *ngIf="showChatbot" class="flex flex-col h-full p-3 w-full">
+
+
+        <div id="chatbox" #chatbox class="flex-grow p-3 text-white space-y-3 overflow-y-hidden transition-all duration-500 rounded-lg bg-black bg-opacity-40 backdrop-blur-xl">
+
+
+            <div *ngFor="let message of messages" class="p-3 rounded-lg max-w-[75%] text-sm leading-relaxed" [ngClass]="{'bg-gray-800 text-white self-end shadow-md': message.startsWith('🧑‍💻'), 
+                            'bg-blue-600 text-white self-start shadow-lg': message.startsWith('🤖')}">
+                {{ message }}
+            </div>
+        </div>
+
+
+        <div class="relative mt-2 flex items-center">
+            <input type="text" #userInput placeholder="Type or Speak..." class="w-full p-3 pl-12 pr-12 rounded-lg bg-gray-900 text-white focus:ring-2 focus:ring-blue-500 focus:outline-none transition-all duration-300 placeholder-gray-400" />
+
+
+            <img src="/assets/send-icon.svg" alt="Send" class="absolute top-1/2 left-3 transform -translate-y-1/2 w-6 h-6 opacity-70 cursor-pointer transition-all duration-300 hover:scale-110" (click)="sendUserMessage(userInput.value)" />
+
+
+            <img src="/assets/microphone.svg" alt="Mic" class="absolute top-1/2 right-3 transform -translate-y-1/2 w-7 h-7 opacity-70 cursor-pointer transition-all duration-300 hover:scale-110" (click)="voiceService.startListening()" />
+        </div>
+    </div>
+</div>

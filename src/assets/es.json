@@ -1,0 +1,14 @@
+{
+    "HEADER": {
+        "TITLE": "Agente de Seguros",
+        "LOGOUT": "Cerrar sesión",
+        "SETTINGS": "Ajustes",
+        "COLORBLIND": {
+            "NORMAL": "Visión normal",
+            "PROTANOPIA": "Protanopía",
+            "DEUTERANOPIA": "Deuteranopía",
+            "TRITANOPIA": "Tritanopía",
+            "ACHROMATOPSIA": "Acromatopsia"
+        }
+    }
+}

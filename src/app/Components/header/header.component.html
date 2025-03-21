@@ -1,0 +1,70 @@
+<!-- Sticky Glassmorphic Header -->
+<div class="fixed top-2 left-1/2 transform -translate-x-1/2 w-[90%] max-w-8xl bg-white bg-opacity-10 backdrop-blur-glass rounded-full p-2 shadow-lg flex justify-between items-center z-[100]">
+
+    <!-- Logo (Top Left Corner) -->
+    <div class="ml-4 w-24 h-12">
+        <img src="/assets/logo.svg" alt="Logo" class="w-full h-full object-contain opacity-80 hover:opacity-100 transition-opacity">
+    </div>
+
+    <!-- Title -->
+    <h2 class="text-xl font-bold text-center flex-grow">
+        {{ 'HEADER.TITLE' | translate }}
+    </h2>
+
+    <!-- Settings Section -->
+    <div class="relative flex items-center gap-4 pr-4">
+
+        <!-- Dark Mode Toggle -->
+        <!-- <div class="w-10 h-10 bg-white bg-opacity-20 backdrop-blur-glass rounded-full flex items-center justify-center cursor-pointer hover:bg-opacity-30 transition-all" (click)="toggleDarkMode()">
+            <img [src]="isDarkMode ? '/assets/light.svg' : '/assets/dark.svg'" alt="Dark Mode Toggle" class="w-6 h-6">
+        </div> -->
+
+        <!-- Language Toggle -->
+        <div class="w-10 h-10 bg-white bg-opacity-20 backdrop-blur-glass rounded-full flex items-center justify-center cursor-pointer hover:bg-opacity-30 transition-all" (click)="toggleLanguage()">
+            <img [src]="currentLanguage === 'en' ? '/assets/spanish.svg' : '/assets/english.svg'" alt="Language Toggle" class="w-6 h-6">
+        </div>
+
+        <!-- Profile Button (Hover to Show Logout) -->
+        <div class="relative" (mouseenter)="showProfile()" (mouseleave)="hideProfile()">
+            <div class="w-10 h-10 bg-white bg-opacity-20 backdrop-blur-glass rounded-full flex items-center justify-center cursor-pointer hover:bg-opacity-30 transition-all">
+                <img src="/assets/profile.svg" class="w-6 h-6">
+            </div>
+            <div *ngIf="isProfileOpen" class="absolute right-0 mt-2 w-40 bg-gray-800 bg-opacity-90 backdrop-blur-lg rounded-lg shadow-lg p-2 z-[200]" (mouseenter)="showProfile()" (mouseleave)="hideProfile()">
+                <button class=" w-full text-left p-2 hover:bg-gray-700 rounded-lg">
+                    🔴 {{ 'HEADER.LOGOUT' | translate }}
+                </button>
+            </div>
+        </div>
+
+        <!-- Settings Icon (Hover to Show Panel) -->
+        <div class="relative" (mouseenter)="showSettingsHover()" (mouseleave)="hideSettingsHover()">
+            <div class="w-10 h-10 bg-white bg-opacity-20 backdrop-blur-glass rounded-full flex items-center justify-center cursor-pointer hover:bg-opacity-30 transition-all">
+                <img src="/assets/settings.svg" alt="Settings" class="w-6 h-6">
+            </div>
+
+            <!-- Sliding Settings Panel -->
+            <div *ngIf="isSettingsVisible" class="absolute top-12 right-0 w-64 bg-white bg-opacity-10 backdrop-blur-lg rounded-lg shadow-lg p-4 transition-all transform z-[150]" (mouseenter)="showSettingsHover()" (mouseleave)="hideSettingsHover()">
+                <h3 class=" text-sm font-semibold">{{ 'HEADER.SETTINGS' | translate }}</h3>
+
+                <!-- Colorblind Mode Options Menu -->
+                <div class="flex flex-col gap-2 mt-2">
+                    <button class="w-full px-4 py-2  bg-white bg-opacity-10 backdrop-blur-md rounded-lg hover:bg-opacity-20 transition" (click)="setColorblindMode('Normal-Condition')">
+                        🌈🔵 {{ 'HEADER.COLORBLIND.NORMAL' | translate }}
+                    </button>
+                    <button class="w-full px-4 py-2  bg-white bg-opacity-10 backdrop-blur-md rounded-lg hover:bg-opacity-20 transition" (click)="setColorblindMode('Protanopia')">
+                        🟢 {{ 'HEADER.COLORBLIND.PROTANOPIA' | translate }}
+                    </button>
+                    <button class="w-full px-4 py-2  bg-white bg-opacity-10 backdrop-blur-md rounded-lg hover:bg-opacity-20 transition" (click)="setColorblindMode('Deuteranopia')">
+                        🔴 {{ 'HEADER.COLORBLIND.DEUTERANOPIA' | translate }}
+                    </button>
+                    <button class="w-full px-4 py-2  bg-white bg-opacity-10 backdrop-blur-md rounded-lg hover:bg-opacity-20 transition" (click)="setColorblindMode('Tritanopia')">
+                        🟣 {{ 'HEADER.COLORBLIND.TRITANOPIA' | translate }}
+                    </button>
+                    <button class="w-full px-4 py-2  bg-white bg-opacity-10 backdrop-blur-md rounded-lg hover:bg-opacity-20 transition" (click)="setColorblindMode('rain-dark')">
+                        ⚫ {{ 'HEADER.COLORBLIND.ACHROMATOPSIA' | translate }}
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
