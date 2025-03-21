@@ -23,7 +23,6 @@ export class ChatbotComponent implements OnInit {
 
   ngOnInit() {
     this.voiceService.transcript$.subscribe(transcript => {
-      debugger;
       if (transcript.includes("hey prince")) {
         this.showChatbot = true;
         this.chatStart = true;
@@ -33,9 +32,9 @@ export class ChatbotComponent implements OnInit {
       if(this.chatStart){
         this.handleUserSpeech(transcript);
       }
-      this.cdRef.detectChanges(); 
+      
     });
-
+    this.cdRef.detectChanges(); 
     this.voiceService.startListening();
   }
   ngAfterViewInit() {
@@ -57,7 +56,7 @@ export class ChatbotComponent implements OnInit {
         this.sendUserMessage(this.lastSpokenText);
         this.lastSpokenText = ''; 
       }
-    }, 2000);
+    }, 1000);
   }
 
   sendUserMessage(message: string) {
@@ -73,7 +72,7 @@ export class ChatbotComponent implements OnInit {
       setTimeout(() => {
         this.messages.push("🤖 I'm still learning!");
         this.cdRef.detectChanges();
-      }, 500);
+      }, 300);
     }
   }
   
